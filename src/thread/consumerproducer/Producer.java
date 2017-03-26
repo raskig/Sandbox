@@ -39,7 +39,7 @@ public class Producer extends Thread {
 
 	public synchronized String getMessage() throws InterruptedException{
 		System.out.println("Get: notifying other threads to wake up:" + Thread.currentThread().getId());
-		notify();
+		//notify();
 		System.out.println("Get: checking if there are still messages left:" + Thread.currentThread().getId());
 		while(messages.size() == 0){
 			System.out.println("Producer/get: waiting for message............................................:" + Thread.currentThread().getId());
@@ -49,6 +49,7 @@ public class Producer extends Thread {
 		String message = messages.firstElement();
 		messages.removeElement(message);
 		System.out.println("Producer: returning message:" + Thread.currentThread().getId());
+		notify();
 		return message;
 	}
 	
